@@ -22,7 +22,6 @@ test("update user settings", async ({ page }) => {
 test("add product to cart", async ({ page }) => {
   const productList = new ProductList(page);
   await productList.open();
-  await productList.assertLoaded();
 
   await productList.addProductToCart("Sauce Labs Backpack");
 });
@@ -30,7 +29,6 @@ test("add product to cart", async ({ page }) => {
 test("apply filter", async ({ page }) => {
   const productList = new ProductList(page);
   await productList.open();
-  await productList.assertLoaded();
 
   await productList.applyFilter("Price (low to high)");
 });

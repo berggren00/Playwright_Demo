@@ -10,7 +10,7 @@ export class ProductList extends BasePage {
   constructor(page: Page) {
     super(page);
     this.searchField = this.page.getByTestId("search-input");
-    this.filterDropdown = this.page.getByRole("combobox", { name: /filter/i });
+    this.filterDropdown = this.page.getByTestId("product-sort-container");
     this.productCards = this.page.locator(".inventory_item");
     this.addToCartButtons = this.page.getByRole("button", {
       name: /add to cart/i,
@@ -20,11 +20,7 @@ export class ProductList extends BasePage {
   async open() {
     await super.open("/inventory.html");
     await this.assertVisible(this.cartBtn);
-  }
-
-  async assertLoaded() {
-    await this.page.waitForURL(/\/products/i);
-    await this.searchField.waitFor({ state: "visible" });
+    await this.assertLoaded(/\/inventory.html/i);
   }
 
   async searchProduct(productName: string) {
@@ -53,7 +49,7 @@ export class ProductList extends BasePage {
       .getByRole("button", { name: /add to cart/i });
   }
 
-  async applyFilter(option: string) {
-    await this.filterDropdown.selectOption({ label: option });
+  async applyFilter(option: number | string) {
+    await this.filterDropdown.selectOption({ value: String(option) });
   }
 }

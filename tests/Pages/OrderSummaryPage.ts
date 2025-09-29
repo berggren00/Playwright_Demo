@@ -21,12 +21,12 @@ export class OrderSummaryPage extends BasePage {
   }
 
   async finishOrder() {
-    this.finishButton.click();
+    await this.finishButton.click();
     await expect(this.page).toHaveURL(/.*checkout-step-one.html/);
   }
 
   async fillDetailsAndBack() {
-    this.backButton.click();
+    await this.backButton.click();
     await expect(this.page).toHaveURL(/.*cart.html/);
   }
 }
