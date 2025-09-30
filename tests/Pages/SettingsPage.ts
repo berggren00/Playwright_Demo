@@ -1,6 +1,7 @@
 import { expect, Locator, Page } from "@playwright/test";
+import { BasePage } from "./BasePage";
 
-export class SettingsPage {
+export class SettingsPage extends BasePage {
   readonly firstName: Locator;
   readonly lastName: Locator;
   readonly email: Locator;
@@ -8,7 +9,8 @@ export class SettingsPage {
   readonly saveBtn: Locator;
   readonly cancelBtn: Locator;
 
-  constructor(private page: Page) {
+  constructor(page: Page) {
+    super(page);
     this.firstName = this.page.getByRole("textbox", { name: "First Name" });
     this.lastName = this.page.getByRole("textbox", { name: "Last Name" });
     this.email = this.page.getByRole("textbox", { name: "Email" });
@@ -19,12 +21,8 @@ export class SettingsPage {
 
   async open() {
     await this.page.goto("/settings");
-    await this.assertLoaded();
-  }
-
-  async assertLoaded() {
-    await expect(this.page).toHaveURL(/\/settings/i);
-    await expect(this.saveBtn).toBeVisible();
+    await this.assertLoaded(/\/settings/i);
+    await this.assertVisible(this.saveBtn);
   }
 
   async waitForVisible() {
