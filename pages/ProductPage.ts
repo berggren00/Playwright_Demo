@@ -1,7 +1,7 @@
 import { Locator, Page, expect } from "@playwright/test";
 import { BasePage } from "./BasePage";
 
-export class ProductList extends BasePage {
+export class ProductPage extends BasePage {
   private readonly searchField: Locator;
   private readonly filterDropdown: Locator;
   private readonly productCards: Locator;

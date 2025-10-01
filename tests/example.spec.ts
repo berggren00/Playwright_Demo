@@ -1,17 +1,17 @@
-import { test, expect } from "@playwright/test";
-import { SettingsPage } from "./Pages/SettingsPage";
-import { ProductList } from "./Pages/ProductList";
-import { CheckoutPage } from "./Pages/CheckoutPage";
-import { LoginPage } from "./Pages/LoginPage";
-import { CheckoutFlow } from "./Pages/CheckoutFlow";
+import { test, expect } from "./fixtures/PageFixtures";
+import { SettingsPage } from "../pages/SettingsPage";
+import { ProductPage } from "../pages/ProductPage";
+import { CheckoutPage } from "../pages/CheckoutPage";
+import { LoginPage } from "../pages/LoginPage";
+import { CheckoutFlow } from "../pages/CheckoutFlow";
 
-test.beforeEach(async ({ page }) => {
-  const loginPage = new LoginPage(page);
-  await loginPage.open();
-  await loginPage.assertLoginButtonVisible();
-  await loginPage.login("standard_user", "secret_sauce");
-  await loginPage.assertLoginSuccessful();
-});
+// test.beforeEach(async ({ page }) => {
+//   const loginPage = new LoginPage(page);
+//   await loginPage.open();
+//   await loginPage.assertLoginButtonVisible();
+//   await loginPage.login("standard_user", "secret_sauce");
+//   await loginPage.assertLoginSuccessful();
+// });
 
 test("update user settings", async ({ page }) => {
   const settings = new SettingsPage(page);
@@ -19,11 +19,12 @@ test("update user settings", async ({ page }) => {
   await settings.updateInfo("Mina", "Lockheed", "mlockheed@gmail.com", "2000");
 });
 
-test("add product to cart", async ({ page }) => {
-  const productList = new ProductList(page);
-  await productList.open();
+test("add product to cart", async ({ loginPage, productPage }) => {
+  await loginPage.open();
+  await loginPage.login("standard_user", "secret_sauce");
 
-  await productList.addProductToCart("Sauce Labs Backpack");
+  await productPage.open();
+  await productPage.addProductToCart("Sauce Labs Backpack");
 });
 
 test("apply filter", async ({ page }) => {

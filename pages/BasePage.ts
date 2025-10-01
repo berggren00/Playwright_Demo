@@ -27,7 +27,7 @@ export class BasePage {
     await expect(locator).toBeVisible();
   }
 
-  async open(path: string = "") {
+  async open(path: string) {
     await this.page.goto(path);
   }
 

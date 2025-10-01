@@ -1,5 +1,6 @@
 import { Page, Locator, expect } from "@playwright/test";
 import { BasePage } from "./BasePage";
+import { OrderConfirmationPage } from "./OrderConfirmationPage";
 
 export class OrderSummaryPage extends BasePage {
   private readonly summaryTitle: Locator;
@@ -28,5 +29,14 @@ export class OrderSummaryPage extends BasePage {
   async fillDetailsAndBack() {
     await this.backButton.click();
     await expect(this.page).toHaveURL(/.*cart.html/);
+  }
+
+  async finish(): Promise<OrderConfirmationPage> {
+    await this.finishButton.click();
+    await expect(this.page).toHaveURL(/\/checkout-complete/i);
+    const confirmation = new OrderConfirmationPage(this.page);
+    (await confirmation.assertLoaded(/\/checkout-complete/i)) &&
+      confirmation.assertVisible(confirmation.thankYouHeader);
+    return confirmation;
   }
 }

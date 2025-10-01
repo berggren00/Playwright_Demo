@@ -1,6 +1,6 @@
 import { Page } from "@playwright/test";
 import { LoginPage } from "./LoginPage";
-import { ProductList } from "./ProductList";
+import { ProductPage } from "./ProductPage";
 import { CheckoutPage } from "./CheckoutPage";
 import { OrderSummaryPage } from "./OrderSummaryPage";
 import { BasePage } from "./BasePage";
@@ -12,7 +12,7 @@ export class CheckoutFlow extends BasePage {
 
   async flow(user: { username: string; password: string }) {
     const loginPage = new LoginPage(this.page);
-    const products = new ProductList(this.page);
+    const products = new ProductPage(this.page);
     const orderSummary = new OrderSummaryPage(this.page);
     const checkout = new CheckoutPage(this.page);
 
