@@ -4,6 +4,7 @@ import { ProductPage } from "../pages/ProductPage";
 import { CheckoutPage } from "../pages/CheckoutPage";
 import { LoginPage } from "../pages/LoginPage";
 import { CheckoutFlow } from "../pages/CheckoutFlow";
+import { log } from "console";
 
 // test.beforeEach(async ({ page }) => {
 //   const loginPage = new LoginPage(page);
@@ -19,30 +20,10 @@ test("update user settings", async ({ page }) => {
   await settings.updateInfo("Mina", "Lockheed", "mlockheed@gmail.com", "2000");
 });
 
-test("add product to cart", async ({ loginPage, productPage }) => {
-  await loginPage.open();
-  await loginPage.login("standard_user", "secret_sauce");
-
-  await productPage.open();
-  await productPage.addProductToCart("Sauce Labs Backpack");
-});
-
-test("apply filter", async ({ page }) => {
-  const productList = new ProductList(page);
-  await productList.open();
-
-  await productList.applyFilter("Price (low to high)");
-});
-
 test("proceed with checkout", async ({ page }) => {
   const checkout = new CheckoutPage(page);
   await checkout.completeCheckout("Mina", "Lockheed", "2000");
   await expect(page).toHaveURL(/\/checkout-step-two/i);
-});
-
-test("open product list", async ({ page }) => {
-  const productList = new ProductList(page);
-  await productList.open();
 });
 
 test("checkout flow", async ({ page }) => {
@@ -51,10 +32,4 @@ test("checkout flow", async ({ page }) => {
     username: "standard_user",
     password: "secret_sauce",
   });
-});
-
-test("add all products to cart", async ({ page }) => {
-  const productList = new ProductList(page);
-  await productList.open();
-  await productList.addAllProductsToCart();
 });
