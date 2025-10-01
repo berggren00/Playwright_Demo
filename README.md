@@ -9,6 +9,7 @@ End-to-end tests for [saucedemo.com] using Playwright and the Page Object Model 
 
 ## Project Structure
 
+```bash
 project-root/
 ├─ pages/ # Page Objects
 │ ├─ LoginPage.ts
@@ -27,6 +28,7 @@ project-root/
 ├─ global-setup.ts # One-time UI login → storageState
 ├─ playwright.config.ts
 └─ package.json
+```
 
 ## Setup
 
