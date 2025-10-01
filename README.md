@@ -35,9 +35,9 @@ project-root/
 # 1) Install deps
 npm i -D @playwright/latest
 
-# 3) Run tests
+# 2) Run tests
 npx playwright test
 
-# 4) View report
+# 3) View report
 npx playwright show-report
 ```
