@@ -25,7 +25,6 @@ project-root/
 │ │ └─ checkout.spec.ts
 │ └─ settings/
 │ └─ settings.spec.ts
-├─ global-setup.ts # One-time UI login → storageState
 ├─ playwright.config.ts
 └─ package.json
 ```
@@ -34,8 +33,7 @@ project-root/
 
 ```bash
 # 1) Install deps
-npm i -D @playwright/test
-npx playwright install
+npm i -D @playwright/latest
 
 # 3) Run tests
 npx playwright test
